@@ -50,7 +50,9 @@ const Detailed = props => {
 
   return (
     <>
+      {" "}
       <Head>
+        {" "}
         <title>博客详细页</title>
       </Head>
       <Header />
@@ -75,14 +77,19 @@ const Detailed = props => {
                 <span>
                   <Icon type="folder" /> {props.typeName}
                 </span>
-                <span>
-                  <Icon type="fire" /> {props.view_count}人
-                </span>
+                {/**
+
+                  <span>
+                   <Icon type="fire" /> {props.view_count}人
+                 </span>
+                  */}
               </div>
 
               <div
                 className="detailed-content"
-                dangerouslySetInnerHTML={{ __html: html }}
+                dangerouslySetInnerHTML={{
+                  __html: html
+                }}
               ></div>
             </div>
           </div>

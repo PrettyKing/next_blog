@@ -10,14 +10,36 @@ import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 // import "../static/style/pages/list.css";
 
+import marked from "marked";
+import hljs from "highlight.js";
+import "highlight.js/styles/monokai-sublime.css";
+
 const ArticleList = list => {
   const [mylist, setMylist] = useState(list.data);
+  const renderer = new marked.Renderer();
+  marked.setOptions({
+    renderer: renderer,
+    gfm: true,
+    pedantic: false,
+    sanitize: false,
+    tables: true,
+    breaks: false,
+    smartLists: true,
+    smartypants: false,
+    sanitize: false,
+    xhtml: false,
+    highlight: function(code) {
+      return hljs.highlightAuto(code).value;
+    }
+  });
   useEffect(() => {
     setMylist(list.data);
   });
   return (
     <>
+      {" "}
       <Head>
+        {" "}
         <title>Home</title>
       </Head>
       <Header />
@@ -40,15 +62,19 @@ const ArticleList = list => {
                 <List.Item>
                   <div className="list-title">
                     <Link
-                      href={{ pathname: "/detailed", query: { id: item.id } }}
+                      href={{
+                        pathname: "/detailed",
+                        query: {
+                          id: item.id
+                        }
+                      }}
                     >
                       <a>{item.title}</a>
                     </Link>
                   </div>
                   <div className="list-icon">
                     <span>
-                      <Icon type="calendar" />
-                      {item.addTime}
+                      <Icon type="calendar" /> {item.addTime}
                     </span>
                     <span>
                       <Icon type="folder" /> {item.typeName}
@@ -57,7 +83,12 @@ const ArticleList = list => {
                       <Icon type="fire" /> {item.view_count}人
                     </span>
                   </div>
-                  <div className="list-context">{item.introduce}</div>
+                  <div
+                    className="list-context"
+                    dangerouslySetInnerHTML={{
+                      __html: marked(item.introduce)
+                    }}
+                  ></div>
                 </List.Item>
               )}
             />
