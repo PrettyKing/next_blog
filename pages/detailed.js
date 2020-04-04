@@ -104,7 +104,6 @@ const Detailed = props => {
           </Affix>
         </Col>
       </Row>
-      <Footer />
     </>
   );
 };

@@ -1,8 +1,13 @@
 .ad-div {
   margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .ad-div div {
   border-radius: 0.3rem;
   margin-bottom: 0.2rem;
   overflow: hidden;
+  font-size: 13px;
+  color: #888;
 }
